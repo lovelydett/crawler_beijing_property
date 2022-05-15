@@ -43,7 +43,7 @@ def getDate(html):
     dates = re.findall(pattern, html)
     return dates
 
-def do_crawling():
+def crawl_community():
     numPage = 50
     with open("price.txt", "w") as outFile:
         for i in range(1, numPage + 1):
@@ -60,4 +60,4 @@ def do_crawling():
             time.sleep(1)
 
 if __name__ == "__main__":
-    do_crawling()
+    crawl_community()
