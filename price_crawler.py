@@ -12,8 +12,8 @@ def getPage(url):
     headers = {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
         'Accept-Language': 'zh-CN,zh;q=0.8',
-        'Referer': 'https://wuhan.anjuke.com/community/?from=navigation',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'
+        'Referer': 'https://beijing.anjuke.com/community/?from=navigation',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/18.17763'
     }
     response = requests.get(url, headers=headers, timeout=30)
     return response.text
@@ -44,8 +44,3 @@ def do_crawling():
 
 if __name__ == "__main__":
     do_crawling()
-
-
-
-
-
