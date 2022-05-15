@@ -29,14 +29,19 @@ def getPage(url):
     return response.text
 
 def getPrice(html):
-    pattern = re.compile(r'<p class="property-price-average" data-v-d4f07c36>([\s\S]+?)</p>')
+    pattern = re.compile(r'<span class="price">([\s\S]+?)<span class="unit">元/平')
     prices = re.findall(pattern, html)
     return prices
 
 def getLocation(html):
-    pattern = re.compile(r'<p class="property-content-info-comm-name" data-v-d4f07c36>([\s\S]+?)</p>')
+    pattern = re.compile(r'<strong class="g-overflow">([\s\S]+?)</strong>')
     locations = re.findall(pattern, html)
     return locations
+
+def getDate(html):
+    pattern = re.compile(r'<label class="date">([\s\S]+?)</label>')
+    dates = re.findall(pattern, html)
+    return dates
 
 def do_crawling():
     numPage = 50
@@ -46,10 +51,12 @@ def do_crawling():
             html = getPage(url)
             locations = getLocation(html)
             prices = getPrice(html)
+            dates = getDate(html)
             assert len(prices) == len(locations)
-            assert len(prices) != 0
+            if len(prices) == 0:
+                print(html)
             for idx in range(len(prices)):
-                outFile.write(f"{locations[idx]} {prices[idx].replace('元/㎡', '')}\n")
+                outFile.write(f"{locations[idx]} {dates[idx].replace('年建造', '')} {prices[idx].replace('元/㎡', '')}\n")
             time.sleep(1)
 
 if __name__ == "__main__":
