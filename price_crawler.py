@@ -28,7 +28,7 @@ def getLocation(html):
     locations = re.findall(pattern, html)
     return locations
 
-def do_job():
+def do_crawling():
     numPage = 50
     with open("price.txt", "w") as outFile:
         for i in range(1, numPage + 1):
@@ -43,7 +43,7 @@ def do_job():
             time.sleep(1)
 
 if __name__ == "__main__":
-    do_job()
+    do_crawling()
 
 
 
