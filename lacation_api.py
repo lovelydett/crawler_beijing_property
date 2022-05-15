@@ -5,7 +5,7 @@ tt
 '''
 import time
 
-from utils import loadConf
+from utils import loadConf, loadCommunity
 
 from urllib.request import urlopen
 from urllib.parse import quote
@@ -45,6 +45,11 @@ def queryPositionBatch(batch):
         time.sleep(1)
 
 if __name__ == "__main__":
-    address = "天安门"
-    lat, lng = queryPosition(address)
-    print(f"Query for {address}: latitude = {lat}, longitude = {lng}")
+    communities = loadCommunity()
+    with open("position_price_community.csv", "w") as f:
+        f.write("name, year, price, lat, lng\n")
+        for community in communities:
+            lat, lng = queryPosition(community["name"])
+            f.write(f'{community["name"]}, {community["year"]}, {community["price"]}, {lat}, {lng}\n')
+            print(f'{community["name"]}, {community["year"]}, {community["price"]}, {lat}, {lng}')
+
