@@ -42,6 +42,34 @@ def loadCommunityWithPositions(filename="position_price_community.csv"):
                 pass
     return results
 
+def loadCompleteCommunityData(filename="complete_community_dataset.csv"):
+    results = {
+        "name": [],
+        "price": [],
+        "age": [],
+        "sp_school": [],
+        "sp_subway": [],
+        "sp_hospital": [],
+        "sp_mall": [],
+        "sp_office": [],
+    }
+    with open(filename, "r") as f:
+        reader = csv.reader(f)
+        for row in reader:
+            try:
+                name, price, age, sp_school, sp_subway, sp_hospital, sp_mall, sp_office = str(row[0].strip()), int(row[1].strip()), int(row[2].strip()), float(row[3].strip()), float(row[4].strip()), float(row[5].strip()), float(row[6].strip()), float(row[7].strip())
+                results["name"].append(name)
+                results["price"].append(price)
+                results["age"].append(age)
+                results["sp_school"].append(sp_school)
+                results["sp_subway"].append(sp_subway)
+                results["sp_hospital"].append(sp_hospital)
+                results["sp_mall"].append(sp_mall)
+                results["sp_office"].append(sp_mall)
+            except:
+                pass
+    return results
+
 if __name__ == "__main__":
     ret = loadCommunityWithPositions()
     print(ret)
