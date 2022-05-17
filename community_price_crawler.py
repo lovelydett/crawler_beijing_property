@@ -45,19 +45,23 @@ def getDate(html):
 
 def crawl_community():
     numPage = 50
-    with open("price.txt", "w") as outFile:
-        for i in range(1, numPage + 1):
+    with open("price.txt", "a") as outFile:
+        i = 1
+        while i <= numPage:
+            print(f'Crawling page {i}:', end=' ')
             url = "https://beijing.anjuke.com/community/p" + str(i)
             html = getPage(url)
             locations = getLocation(html)
             prices = getPrice(html)
             dates = getDate(html)
             assert len(prices) == len(locations)
+            print(f'{len(prices)} properties')
             if len(prices) == 0:
-                print(html)
+                i -= 1
             for idx in range(len(prices)):
                 outFile.write(f"{locations[idx]} {dates[idx].replace('年建造', '')} {prices[idx].replace('元/㎡', '')}\n")
-            time.sleep(1)
+            time.sleep(2)
+            i += 1
 
 if __name__ == "__main__":
     crawl_community()

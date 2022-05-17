@@ -12,12 +12,15 @@ def loadCommunity(filename="price_community.txt"):
     communities = []
     with open(filename, "r", encoding="utf-8") as f:
         for line in f.readlines():
-            name, year, price = line.split()
-            communities.append({
-                "name": name,
-                "year": int(year),
-                "price": int(price),
-            })
+            try:
+                name, year, price = line.split()
+                communities.append({
+                    "name": name,
+                    "year": int(year),
+                    "price": int(price),
+                })
+            except:
+                pass
     return communities
 
 def loadCommunityWithPositions(filename="position_price_community.csv"):
