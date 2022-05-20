@@ -2,3 +2,4 @@ crawler.conf
 __pycache__
 .ipynb_checkpoints
 cache
+.idea
