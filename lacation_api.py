@@ -39,14 +39,14 @@ def queryPosition(address, max_try=5):
 
 def locate_communities():
     communities = loadCommunity()
-    with open("position_price_community.csv", "w") as f:
-        f.write("name,year,price,lat,lng\n")
+    with open("community_price_position.csv", "w") as f:
+        f.write("name,year,price,dist,lat,lng\n")
         for community in communities:
             lat, lng = queryPosition("北京 " + community["name"])
             if lat == None:
                 continue
-            f.write(f'{community["name"]},{community["year"]},{community["price"]},{lat},{lng}\n')
-            print(f'{community["name"]},{community["year"]},{community["price"]},{lat},{lng}')
+            f.write(f'{community["name"]},{community["year"]},{community["price"]},{community["dist"]},{lat},{lng}\n')
+            print(f'{community["name"]},{community["year"]},{community["price"]},{community["dist"]},{lat},{lng}')
 
 if __name__ == "__main__":
     locate_communities()

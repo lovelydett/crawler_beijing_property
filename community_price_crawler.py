@@ -43,9 +43,17 @@ def getDate(html):
     dates = re.findall(pattern, html)
     return dates
 
+def getDistrict(html):
+    pattern = re.compile(r'<label class="g-overflow" style="display:block;">([\s\S]+?)</label>')
+    districts = re.findall(pattern, html)
+    for i in range(len(districts)):
+        districts[i] = districts[i].split()[0].strip()
+    return districts
+
 def crawl_community():
     numPage = 50
-    with open("price.txt", "a") as outFile:
+    with open("community.txt", "a") as outFile:
+        outFile.write("name,year,price,dist\n")
         i = 1
         while i <= numPage:
             print(f'Crawling page {i}:', end=' ')
@@ -54,12 +62,13 @@ def crawl_community():
             locations = getLocation(html)
             prices = getPrice(html)
             dates = getDate(html)
+            districts = getDistrict(html)
             assert len(prices) == len(locations)
             print(f'{len(prices)} properties')
             if len(prices) == 0:
                 i -= 1
             for idx in range(len(prices)):
-                outFile.write(f"{locations[idx]} {dates[idx].replace('年建造', '')} {prices[idx].replace('元/㎡', '')}\n")
+                outFile.write(f"{locations[idx]} {dates[idx].replace('年建造', '')} {prices[idx].replace('元/㎡', '')} {districts[idx]}\n")
             time.sleep(2)
             i += 1
 

@@ -8,16 +8,17 @@ def loadConf(filename="crawler.conf"):
             confs[key] = value
     return confs
 
-def loadCommunity(filename="price_community.txt"):
+def loadCommunity(filename="community_price.txt"):
     communities = []
     with open(filename, "r", encoding="utf-8") as f:
         for line in f.readlines():
             try:
-                name, year, price = line.split()
+                name, year, price, dist = line.split()
                 communities.append({
                     "name": name,
                     "year": int(year),
                     "price": int(price),
+                    "dist": dist,
                 })
             except:
                 pass
