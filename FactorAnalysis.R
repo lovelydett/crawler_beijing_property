@@ -14,7 +14,7 @@ library(MuMIn)
 library(dplyr) 
 
 #load data and transfer the data type
-data<-read.csv("../complete_community_dataset.csv")
+data<-read.csv("~/Documents/BigdataProcessing/crawler_beijing_property/complete_community_dataset.csv")
 price<-as.numeric(data$price)
 age<-as.numeric(as.integer(data$age))
 dist_tam<-as.numeric(as.double(data$dist_tam))
